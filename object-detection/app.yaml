@@ -1,0 +1,8 @@
+name: Object-Detection
+description: ""
+ports: []
+bricks:
+- arduino:video_object_detection:
+    model: ei-model-1054456-4
+- arduino:web_ui: {}
+icon: 😀

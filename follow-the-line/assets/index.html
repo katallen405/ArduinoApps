@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Follow The Line</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <h1>Follow The Line</h1>
+
+    <div id="videoFeedContainer">
+      <div id="videoPlaceholder">Connecting to camera stream...</div>
+      <iframe id="dynamicIframe" title="Video stream" width="640" height="480"
+              frameborder="0" style="display: none"></iframe>
+    </div>
+
+    <div id="statusPanel">
+      <div><span class="label">Mode:</span> <span id="mode">-</span></div>
+      <div><span class="label">Line position (x):</span> <span id="linePos">-</span></div>
+      <div><span class="label">Last action:</span> <span id="lastAction">-</span></div>
+    </div>
+
+    <h2>Event log</h2>
+    <ul id="eventLog"></ul>
+
+    <script>
+      const iframe = document.getElementById('dynamicIframe');
+      const placeholder = document.getElementById('videoPlaceholder');
+      const streamUrl = `http://${window.location.hostname}:4912/embed`;
+
+      iframe.onload = () => {
+        placeholder.style.display = 'none';
+        iframe.style.display = 'block';
+      };
+
+      const intervalId = setInterval(() => { iframe.src = streamUrl; }, 1000);
+      iframe.addEventListener('load', () => clearInterval(intervalId));
+    </script>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="libs/arduino.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

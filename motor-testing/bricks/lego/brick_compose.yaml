@@ -1,0 +1,16 @@
+services:
+  lego-ble:
+    image: lego-ble:1
+    user: "0:0"
+    volumes:
+      - /run/arduino-router.sock:/run/arduino-router.sock
+      - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket
+    environment:
+      ROUTER_SOCKET: /run/arduino-router.sock
+      DBUS_SYSTEM_BUS_ADDRESS: unix:path=/run/dbus/system_bus_socket
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
+    restart: unless-stopped

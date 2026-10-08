@@ -1,0 +1,7 @@
+name: LEGO-brick-robot
+description: "First-person goalkeeper: color-track ball + Kalman, slide a DoubleMotor to block."
+ports: []
+bricks:
+- arduino:web_ui: {}
+- lego: {}
+icon: 🥅

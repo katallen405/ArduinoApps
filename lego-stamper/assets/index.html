@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lego Stamper</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>😀 Lego Stamper</h1>
+      <span id="conn-status" class="status status-off">disconnected</span>
+    </div>
+
+    <div class="tiles">
+      <div class="tile">
+        <div class="tile-label">Status</div>
+        <div id="tile-status" class="tile-value">-</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Last detection</div>
+        <div id="tile-detection" class="tile-value">-</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Last stamp</div>
+        <div id="tile-stamp" class="tile-value">-</div>
+      </div>
+    </div>
+
+    <div class="camera-wrap">
+      <div class="tile-label">Live camera feed</div>
+      <!-- Fed by ui.expose_camera(...) in main.py - if that line is commented out
+           to save resources, this image just fails to load, which is fine. -->
+      <img id="camera-preview" src="/camera_preview" alt="camera preview" />
+    </div>
+
+    <div class="log-wrap">
+      <div class="tile-label">Log</div>
+      <div id="log" class="log"></div>
+    </div>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="libs/arduino.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  background: #111;
+  color: #eee;
+}
+
+#videoFeedContainer {
+  width: 640px;
+  height: 480px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#statusPanel {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #1c1c1c;
+  border-radius: 8px;
+  display: grid;
+  gap: 0.4rem;
+}
+
+#statusPanel .label {
+  color: #999;
+  margin-right: 0.5rem;
+}
+
+#eventLog {
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#eventLog li {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #222;
+  font-size: 0.9rem;
+}

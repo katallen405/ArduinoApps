@@ -1,0 +1,5 @@
+id: lego
+name: LEGO Education
+description: "BLE bridge to LEGO Education motors and sensors."
+requires_container: true
+category: hardware

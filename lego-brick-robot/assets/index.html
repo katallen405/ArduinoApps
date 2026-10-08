@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goalkeeper</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>🥅 Goalkeeper</h1>
+      <span id="conn-status" class="status status-off">disconnected</span>
+    </div>
+
+    <div class="gauge-wrap">
+      <div class="gauge">
+        <div id="gauge-center-line" class="gauge-center-line"></div>
+        <div id="gauge-marker" class="gauge-marker"></div>
+      </div>
+      <div class="gauge-labels">
+        <span>left post</span>
+        <span id="action-label">-</span>
+        <span>right post</span>
+      </div>
+    </div>
+
+    <div class="tiles">
+      <div class="tile"><div class="tile-label">Ball</div><div id="tile-found" class="tile-value">-</div></div>
+      <div class="tile"><div class="tile-label">Predicted dir</div><div id="tile-dir" class="tile-value">-</div></div>
+      <div class="tile"><div class="tile-label">Keeper pos</div><div id="tile-pos" class="tile-value">-</div></div>
+      <div class="tile"><div class="tile-label">Motor cmd</div><div id="tile-cmd" class="tile-value">-</div></div>
+      <div class="tile"><div class="tile-label">Ball vx (px/frame)</div><div id="tile-vx" class="tile-value">-</div></div>
+      <div class="tile"><div class="tile-label">FPS</div><div id="tile-fps" class="tile-value">-</div></div>
+    </div>
+
+    <p class="note">
+      Idle: the keeper tilts back and forth around center. When the Kalman filter
+      predicts the ball heading left/right, it nudges that way — bounded to the goal
+      width, never chasing forward. Green = filtered ball, blue arrow = prediction.
+    </p>
+
+    <div class="camera-wrap">
+      <div class="tile-label">Live camera feed (Kalman overlay)</div>
+      <img id="camera-preview" alt="live view" />
+    </div>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="libs/arduino.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

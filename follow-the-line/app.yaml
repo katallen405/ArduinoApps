@@ -1,0 +1,8 @@
+name: Follow the Line
+description: ""
+ports: []
+bricks:
+- arduino:web_ui: {}
+- arduino:video_object_detection:
+    model: ei-model-1054456-1
+icon: 😀

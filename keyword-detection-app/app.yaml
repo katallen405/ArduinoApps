@@ -1,0 +1,7 @@
+name: Keyword Detection App
+description: ""
+ports: []
+bricks:
+- arduino:audio_classification:
+    model: ei-model-1033638-1
+icon: 😀

@@ -1,0 +1,8 @@
+name: Chase The Minifig
+description: Detects a LEGO minifigure with a custom Edge Impulse model and steers a LEGO double motor with proportional control to keep it centered in the camera frame.
+ports: []
+bricks:
+- arduino:object_detection:
+    model: ei-model-1054456-2
+- arduino:web_ui: {}
+icon: 😀

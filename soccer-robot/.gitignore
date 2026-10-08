@@ -1,0 +1,4 @@
+# ignore app cache folder
+.cache/
+keeper_debug.jpg
+__pycache__/

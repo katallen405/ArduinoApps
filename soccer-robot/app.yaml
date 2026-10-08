@@ -1,0 +1,8 @@
+name: soccer-robot
+description: "First-person goalkeeper: color-track ball + Kalman, slide a DoubleMotor to block."
+ports: []
+bricks:
+- arduino:web_ui: {}
+- arduino:video_object_detection:
+    model: ei-model-1065240-1
+icon: 🥅

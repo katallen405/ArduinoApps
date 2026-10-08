@@ -1,0 +1,9 @@
+name: lego stamper
+description: "Detects a minifig, rat, or car with a custom Edge Impulse model and stamps the matching LEGO arm down."
+ports:
+  - 7000
+bricks:
+- arduino:video_object_detection:
+    model: ei-model-1063859-1
+- arduino:web_ui: {}
+icon: 😀

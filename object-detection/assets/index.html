@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minifig-Following Robot</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>🤖 Minifig-Following Robot</h1>
+    </header>
+
+    <main class="layout">
+      <!-- Left column: video + status -->
+      <section class="col-video">
+        <div class="card">
+          <div id="videoFeedContainer">
+            <div id="videoPlaceholder">Connecting to camera stream…</div>
+            <iframe id="dynamicIframe" title="Video stream" width="640" height="480"
+                    frameborder="0" style="display: none"></iframe>
+            <div id="fpsBadge">-- FPS</div>
+            <div id="detectionOverlay">
+              <div id="overlayBox"></div>
+              <div id="overlayLabel"></div>
+            </div>
+            <div id="searchDirectionIndicator">
+              <span class="arrow">←</span>
+              <span class="text">last seen this way</span>
+            </div>
+          </div>
+          <div class="status-row">
+            <div id="statusBadge" class="status-lost">NO TARGET</div>
+          </div>
+          <div class="steer-wrap">
+            <div class="steer-labels"><span>◀ left</span><span>right ▶</span></div>
+            <div id="steerBar"><div id="steerIndicator"></div><div id="steerCenter"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right column: telemetry, calibration, tuning, log -->
+      <section class="col-panel">
+        <div class="card">
+          <h2>📊 Live Detection</h2>
+          <table id="telemetryTable">
+            <tr><td>Label</td><td id="t-label">–</td></tr>
+            <tr><td>Confidence</td><td id="t-confidence">–</td></tr>
+            <tr><td>x, y</td><td id="t-xy">–</td></tr>
+            <tr><td>Width × height</td><td id="t-wh">–</td></tr>
+            <tr><td>Centroid (cₓ, c_y)</td><td id="t-centroid">–</td></tr>
+            <tr><td>Area ratio</td><td id="t-area">–</td></tr>
+            <tr><td>Estimated distance</td><td id="t-distance">–</td></tr>
+            <tr><td>Motor speed (L / R)</td><td id="t-speeds">–</td></tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h2>📏 Distance Calibration</h2>
+          <p class="hint">Place the minifig at a known distance, enter it below, then calibrate. Only needs to be done once per camera setup.</p>
+          <div class="field-row">
+            <label for="calib-distance">Known distance</label>
+            <div class="input-with-unit">
+              <input type="number" id="calib-distance" value="30" min="5" max="300" />
+              <span class="unit">cm</span>
+              <button id="calib-btn">Calibrate</button>
+            </div>
+          </div>
+          <p id="calib-status" class="status-text"></p>
+
+          <div class="slider-field">
+            <div class="slider-label">
+              <span>Target following distance</span>
+              <span class="slider-value"><span id="v-target-dist">23</span> cm</span>
+            </div>
+            <input type="range" id="s-target-dist" min="10" max="150" step="5" value="23" />
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>🎛️ Tuning</h2>
+          <div class="slider-field">
+            <div class="slider-label">
+              <span>Confidence threshold</span>
+              <span class="slider-value"><span id="v-conf">0.8</span></span>
+            </div>
+            <input type="range" id="s-conf" min="0.1" max="0.95" step="0.05" value="0.8" />
+          </div>
+          <div class="slider-field">
+            <div class="slider-label">
+              <span>Steering gain</span>
+              <span class="slider-value"><span id="v-gain">10</span></span>
+            </div>
+            <input type="range" id="s-gain" min="0" max="150" step="5" value="10" />
+          </div>
+          <div class="slider-field">
+            <div class="slider-label">
+              <span>Target area ratio (fallback follow distance)</span>
+              <span class="slider-value"><span id="v-area">0.04</span></span>
+            </div>
+            <input type="range" id="s-area" min="0.005" max="0.1" step="0.005" value="0.04" />
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>📝 Event Log</h2>
+          <ul id="eventLog"></ul>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const iframe = document.getElementById('dynamicIframe');
+      const placeholder = document.getElementById('videoPlaceholder');
+      const streamUrl = `http://${window.location.hostname}:4912/embed`;
+
+      iframe.onload = () => {
+        placeholder.style.display = 'none';
+        iframe.style.display = 'block';
+      };
+
+      const intervalId = setInterval(() => { iframe.src = streamUrl; }, 1000);
+      iframe.addEventListener('load', () => clearInterval(intervalId));
+    </script>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="libs/arduino.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

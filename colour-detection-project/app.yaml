@@ -1,0 +1,10 @@
+name: Colour Detection Project
+description: ""
+ports: []
+bricks:
+- arduino:video_image_classification:
+    model: ei-model-1027215-5
+- arduino:web_ui: {}
+- arduino:video_object_detection:
+    model: hand-gestures
+icon: 😀

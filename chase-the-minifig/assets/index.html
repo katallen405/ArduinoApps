@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chase The Minifig</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>😀 Chase The Minifig</h1>
+      <span id="conn-status" class="status status-off">disconnected</span>
+    </div>
+
+    <div class="gauge-wrap">
+      <div class="gauge">
+        <div id="gauge-center-line" class="gauge-center-line"></div>
+        <div id="gauge-marker" class="gauge-marker"></div>
+      </div>
+      <div class="gauge-labels">
+        <span>left</span>
+        <span id="action-label">-</span>
+        <span>right</span>
+      </div>
+    </div>
+
+    <div class="tiles">
+      <div class="tile">
+        <div class="tile-label">FPS</div>
+        <div id="tile-fps" class="tile-value">-</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Frame time</div>
+        <div id="tile-frame-ms" class="tile-value">-</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Confidence</div>
+        <div id="tile-confidence" class="tile-value">-</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Error (px)</div>
+        <div id="tile-error" class="tile-value">-</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Minifigs detected</div>
+        <div id="tile-count" class="tile-value">-</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Distance (box height)</div>
+        <div id="tile-distance" class="tile-value">-</div>
+      </div>
+    </div>
+
+    <p class="note">
+      Target label: <code id="target-label">-</code> &middot; "Frame time" is the full
+      capture-to-decision loop latency, not raw model-only inference time &middot;
+      "Distance" is bounding-box height as a % of frame height (bigger = closer) -
+      coarse/quantized since the model's boxes come from a 96x96 activation grid.
+    </p>
+
+    <div class="camera-wrap">
+      <div class="tile-label">Live camera feed (debug)</div>
+      <!-- Fed by ui.expose_camera(...) in main.py - if that line is commented out
+           to save resources, this image just fails to load, which is fine. -->
+      <img id="camera-preview" src="/camera_preview" alt="camera preview" />
+    </div>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="libs/arduino.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
